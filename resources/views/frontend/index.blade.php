@@ -7,30 +7,44 @@
                 <div class="section-one">
                   <h2>Section One</h2>
                   <div class="row">
-                      <div class="col-md-6">
-                          <img src="{{ asset('public/images/video.png') }}" alt="">
-                          <h4>Title</h4>
-                      </div>
-                      <div class="col-md-6">
-                          <div class="row">
-                              <div class="col-md-6">
-                                <img src="{{ asset('public/images/video.png') }}" alt="">
-                                <h6>Title</h6>
-                              </div>
-                              <div class="col-md-6">
-                                <img src="{{ asset('public/images/video.png') }}" alt="">
-                                <h6>Title</h6>
-                              </div>
-                              <div class="col-md-6">
-                                <img src="{{ asset('public/images/video.png') }}" alt="">
-                                <h6>Title</h6>
-                              </div>
-                              <div class="col-md-6">
-                                <img src="{{ asset('public/images/video.png') }}" alt="">
-                                <h6>Title</h6>
-                              </div>
-                          </div>
-                      </div>
+
+                   @php $i = 1; @endphp
+
+                   @foreach ($postcontents as $postcontent)
+
+                    @if ($i == 1)
+                        <div class="col-md-6">
+                            <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                            <h4> <a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h4>
+                            <p>{{ $postcontent->description }}</p>
+                        </div>
+                    @endif
+
+                    @php $i--; @endphp
+
+                    @endforeach
+
+
+                    <div class="col-md-6">
+                        <div class="row">
+
+                        @php $i = 2; @endphp
+
+                        @foreach ($postcontents as $postcontent)
+
+                            @if ($i > 2)
+                            <div class="col-md-6">
+                            <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                            <h6><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h6>
+                            </div>
+                            @endif
+
+                            @php $i++; @endphp
+
+                        @endforeach
+
+                        </div>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -39,28 +53,37 @@
                 <div class="section-two">
                   <h2>Section Two</h2>
                   <div class="row">
+                    @php $i = 1; @endphp
+
+                    @foreach ($postcontenttwo as $postcontent)
+
+                     @if ($i == 1)
                     <div class="col-md-12">
-                        <img src="{{ asset('public/images/video.png') }}" alt="">
-                        <h4>Title</h4>
+                        <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                        <h4><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h4>
+                        <p>{{ $postcontent->description }}</p>
                     </div>
+                    @endif
+
+                    @php $i--; @endphp
+
+                    @endforeach
                     <div class="col-md-12 side-top">
                         <div class="row">
+                            @php $i = 2; @endphp
+
+                        @foreach ($postcontenttwo as $postcontent)
+
+                            @if ($i > 2)
                             <div class="col-md-6">
-                              <img src="{{ asset('public/images/video.png') }}" alt="">
-                              <h6>Title</h6>
+                                <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                                <h6><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h6>
                             </div>
-                            <div class="col-md-6">
-                              <img src="{{ asset('public/images/video.png') }}" alt="">
-                              <h6>Title</h6>
-                            </div>
-                            <div class="col-md-6">
-                              <img src="{{ asset('public/images/video.png') }}" alt="">
-                              <h6>Title</h6>
-                            </div>
-                            <div class="col-md-6">
-                              <img src="{{ asset('public/images/video.png') }}" alt="">
-                              <h6>Title</h6>
-                            </div>
+                            @endif
+
+                            @php $i++; @endphp
+
+                        @endforeach
                         </div>
                     </div>
                 </div>
