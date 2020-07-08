@@ -68,7 +68,18 @@ class PostContentController extends Controller
                $this->setError($e->getMessage());
                return redirect()->back();
            }
-    }
+        }
 
-   
+           public function active (Request $request, $id)
+           {
+              $post_id = PostContent::findOrFail($id);
+
+              $post_id->active = 1;
+              $post_id->save();
+
+              $this->setSuccess('Post active successfully');
+              return redirect()->back();
+           }
+
+
 }

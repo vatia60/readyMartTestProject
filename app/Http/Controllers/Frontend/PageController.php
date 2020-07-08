@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\PostContent;
+use App\Section;
 
 class PageController extends Controller
 {
     public function index()
     {
         $data = [];
-        $data['postcontents'] = PostContent::orderBy('id', 'desc')->where('section_id', 1)->paginate(5);
-        $data['postcontenttwo'] = PostContent::orderBy('id', 'desc')->where('section_id', 2)->paginate(5);
+        $data['sections'] = Section::with(['contents'])->get();
+        //return $data['sections'];
+
         return view('frontend.index', $data);
     }
 

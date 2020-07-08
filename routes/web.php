@@ -31,6 +31,8 @@ Route::group(['namespace' => 'Backend', 'middleware' => 'auth', 'prefix' => 'adm
         Route::get('/', 'PostContentController@index')->name('postcontent.index');
         Route::get('/create', 'PostContentController@create')->name('postcontent.create');
         Route::post('/create', 'PostContentController@store')->name('postcontent.store');
+
+        Route::post('/active/{id}', 'PostContentController@active')->name('postcontent.active');
       });
 });
 

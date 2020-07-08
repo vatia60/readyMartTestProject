@@ -3,92 +3,118 @@
 <div class="content-body">
     <div class="container">
         <div class="row">
+
             <div class="col-md-7">
-                <div class="section-one">
-                  <h2>Section One</h2>
-                  <div class="row">
+                @php
+                    $counter = 1;
+                @endphp
+                @foreach($sections as $section)
+                @if($counter%2 !==0)
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="section-one">
+                            <h2>{!! $section->section_name !!}</h2>
+                            @if(count($section->contents) > 0)
+                            <div class="row">
 
-                   @php $i = 1; @endphp
+                             @php
+                              $postcontent = $section->contents->first();
 
-                   @foreach ($postcontents as $postcontent)
+                             @endphp
 
-                    @if ($i == 1)
-                        <div class="col-md-6">
-                            <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
-                            <h4> <a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h4>
-                            <p>{{ $postcontent->description }}</p>
-                        </div>
-                    @endif
-
-                    @php $i--; @endphp
-
-                    @endforeach
+                             <div class="col-md-6">
+                              <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                              <h4> <a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h4>
+                              <p>{{ $postcontent->description }}</p>
+                             </div>
 
 
-                    <div class="col-md-6">
-                        <div class="row">
 
-                        @php $i = 2; @endphp
 
-                        @foreach ($postcontents as $postcontent)
+                              <div class="col-md-6">
+                                  <div class="row">
 
-                            @if ($i > 2)
-                            <div class="col-md-6">
-                            <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
-                            <h6><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h6>
+                                  @php $i = 2; @endphp
+
+                                  @foreach ($section->contents->take(4) as $postcontent)
+
+                                      @if ($i >= 2)
+                                      <div class="col-md-6">
+                                      <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                                      <h6><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h6>
+                                      </div>
+                                      @endif
+
+                                      @php $i++; @endphp
+
+                                  @endforeach
+
+                                  </div>
+                              </div>
                             </div>
                             @endif
-
-                            @php $i++; @endphp
-
-                        @endforeach
-
-                        </div>
+                          </div>
                     </div>
-                  </div>
                 </div>
+                @endif
+                @php
+                    $counter++
+                 @endphp
+                @endforeach
             </div>
             <div class="col-md-1"><hr class="mart-hr"></div>
             <div class="col-md-4">
-                <div class="section-two">
-                  <h2>Section Two</h2>
-                  <div class="row">
-                    @php $i = 1; @endphp
+                @php
+                    $counter = 1;
+                @endphp
+                 @foreach($sections as $section)
+                 @if($counter%2 ==0)
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="section-two">
+                                <h2>{!! $section->section_name !!}</h2>
+                                @if(count($section->contents) > 0)
+                                <div class="row">
+                                    @php
+                                    $postcontent = $section->contents->first();
+                                    @endphp
+                                    <div class="col-md-12">
+                                        <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                                        <h4><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h4>
+                                        <p>{{ $postcontent->description }}</p>
+                                    </div>
+                                    <div class="col-md-12 side-top">
+                                        <div class="row">
+                                            @php $i = 2; @endphp
 
-                    @foreach ($postcontenttwo as $postcontent)
+                                        @foreach ($section->contents->take(4) as $postcontent)
 
-                     @if ($i == 1)
-                    <div class="col-md-12">
-                        <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
-                        <h4><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h4>
-                        <p>{{ $postcontent->description }}</p>
-                    </div>
-                    @endif
+                                            @if ($i >= 2)
+                                            <div class="col-md-6">
+                                                <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
+                                                <h6><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h6>
+                                            </div>
+                                            @endif
 
-                    @php $i--; @endphp
+                                            @php $i++; @endphp
 
-                    @endforeach
-                    <div class="col-md-12 side-top">
-                        <div class="row">
-                            @php $i = 2; @endphp
+                                        @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
 
-                        @foreach ($postcontenttwo as $postcontent)
-
-                            @if ($i > 2)
-                            <div class="col-md-6">
-                                <img src="{{ asset('public/images').'/'. $postcontent->image }}" alt="">
-                                <h6><a href="{{ route('postcontent.single', $postcontent->id) }}">{{ $postcontent->title }}</a></h6>
                             </div>
-                            @endif
-
-                            @php $i++; @endphp
-
-                        @endforeach
                         </div>
                     </div>
-                </div>
-                </div>
+                 @endif
+                 @php
+                    $counter++
+                 @endphp
+                 @endforeach
+
             </div>
+
         </div>
     </div>
 </div>
